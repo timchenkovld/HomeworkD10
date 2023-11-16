@@ -19,8 +19,8 @@ public class Ticket {
     private Long clientId;
 
     @Column(name = "from_planet_id", nullable = false)
-    private Long fromPlanetId;
+    private String fromPlanetId;
 
     @Column(name = "to_planet_id", nullable = false)
-    private Long toPlanetId;
+    private String toPlanetId;
 }
