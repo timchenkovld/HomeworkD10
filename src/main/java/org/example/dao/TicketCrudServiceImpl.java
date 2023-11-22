@@ -1,24 +1,25 @@
 package org.example.dao;
 
-import org.example.entity.Planet;
+import org.example.entity.Client;
+import org.example.entity.Ticket;
 import org.example.hibernate.HibernateUtils;
-import org.example.utils.PlanetUtils;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.List;
 import java.util.Objects;
 
-public class PlanetCrudServiceImpl implements PlanetCrudService{
-    private static final String GET_ALL_PLANETS_QUERY = "from Planet";
+public class TicketCrudServiceImpl implements TicketCrudService{
+    private static final String GET_ALL_TICKETS_QUERY = "from Ticket";
     @Override
-    public Planet createPlanet(Planet planet) {
+    public Ticket createTicket(Ticket ticket) {
         try (Session session = HibernateUtils.getInstance().getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
             try {
-                session.persist(planet);
+                ticket.setId(null);
+                session.persist(ticket);
                 transaction.commit();
-                return planet;
+                return ticket;
             } catch (Exception e) {
                 e.printStackTrace();
                 transaction.rollback();
@@ -28,16 +29,16 @@ public class PlanetCrudServiceImpl implements PlanetCrudService{
     }
 
     @Override
-    public Planet updatePlanet(Planet planet) {
-        if (Objects.isNull(planet.getId())) {
+    public Ticket updateTicket(Ticket ticket) {
+        if (Objects.isNull(ticket.getId())) {
             return null;
         }
-        try (Session session = HibernateUtils.getInstance().getSessionFactory().openSession()) {
+        try (Session session = HibernateUtils.getInstance().getSessionFactory().openSession()){
             Transaction transaction = session.beginTransaction();
             try {
-                session.merge(planet);
+                session.merge(ticket);
                 transaction.commit();
-                return planet;
+                return ticket;
             } catch (Exception e) {
                 e.printStackTrace();
                 transaction.rollback();
@@ -47,25 +48,25 @@ public class PlanetCrudServiceImpl implements PlanetCrudService{
     }
 
     @Override
-    public Planet getPlanetById(String planetId) {
+    public Ticket getTicketById(Long ticketId) {
         try (Session session = HibernateUtils.getInstance().getSessionFactory().openSession()) {
-            return session.get(Planet.class, planetId);
+            return session.get(Ticket.class, ticketId);
         }
     }
 
     @Override
-    public List<Planet> getAllPlanets() {
+    public List<Ticket> getAllTickets() {
         try (Session session = HibernateUtils.getInstance().getSessionFactory().openSession()) {
-            return session.createQuery(GET_ALL_PLANETS_QUERY, Planet.class).list();
+            return session.createQuery(GET_ALL_TICKETS_QUERY, Ticket.class).list();
         }
     }
 
     @Override
-    public void deleteClientById(String planetId) {
+    public void deleteTicketById(Long ticketId) {
         try(Session session = HibernateUtils.getInstance().getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
-            Planet planet = session.get(Planet.class, planetId);
-            session.remove(planet);
+            Ticket ticket = session.get(Ticket.class, ticketId);
+            session.remove(ticket);
             transaction.commit();
         }
     }

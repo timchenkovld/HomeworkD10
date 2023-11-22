@@ -5,9 +5,9 @@ import org.example.entity.Client;
 import java.util.List;
 
 public interface ClientCrudService {
-    boolean createClient(Client client);
+    Client createClient(Client client);
 
-    boolean updateClient(Client client);
+    Client updateClient(Client client);
 
     Client getClientById(Long clientId);
 

@@ -5,9 +5,9 @@ import org.example.entity.Planet;
 import java.util.List;
 
 public interface PlanetCrudService {
-    boolean createPlanet(Planet planet);
+    Planet createPlanet(Planet planet);
 
-    boolean updatePlanet(Planet planet);
+    Planet updatePlanet(Planet planet);
 
     Planet getPlanetById(String planetId);
 

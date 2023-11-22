@@ -24,6 +24,8 @@ ALTER TABLE ticket ALTER COLUMN id SET DEFAULT nextval('ticket_seq');
 
 ALTER TABLE ticket ADD CONSTRAINT client_tickets_fk FOREIGN KEY (client_id)
 REFERENCES client(id) ON DELETE CASCADE;
-
-
+ALTER TABLE ticket ADD CONSTRAINT from_planet_fk FOREIGN KEY (from_planet_id)
+REFERENCES planet(id) ON DELETE CASCADE;
+ALTER TABLE ticket ADD CONSTRAINT to_planet_fk FOREIGN KEY (to_planet_id)
+REFERENCES planet(id) ON DELETE CASCADE;
 

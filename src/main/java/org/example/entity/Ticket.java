@@ -15,12 +15,15 @@ public class Ticket {
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-    @Column(name = "client_id", nullable = false)
-    private Long clientId;
+    @ManyToOne
+    @JoinColumn(name = "client_id", nullable = false)
+    private Client client;
 
-    @Column(name = "from_planet_id", nullable = false)
-    private String fromPlanetId;
+    @ManyToOne
+    @JoinColumn(name = "from_planet_id", nullable = false)
+    private Planet fromPlanet;
 
-    @Column(name = "to_planet_id", nullable = false)
-    private String toPlanetId;
+    @ManyToOne
+    @JoinColumn(name = "to_planet_id", nullable = false)
+    private Planet toPlanet;
 }
